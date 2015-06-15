@@ -1,0 +1,45 @@
+Time Limit Exceeded:超时，大多数是死循环。
+
+Input:	123
+Output:	86
+Expected:	321
+
+
+1028 / 1032 test cases passed.
+Status: Wrong Answer
+Submitted: 1 minute ago
+Input:	1534236469
+Output:	1056389759
+Expected:	0
+
+-------------------------------------------------------------------
+
+public class Solution {
+   public int reverse(int x) {
+	        ArrayList<Integer> list = new ArrayList<Integer>();
+	        int flag = 0;
+	        int i,length;
+	        Integer count,temp;
+	        if (x < 0) { 
+	            flag = 1;
+	            x = -x;
+	        }
+	        while (x > 0) {
+	            list.add(x%10);
+	            x = x/10;
+	        }
+	        i = 0;
+	        length = list.size();
+	        temp = count = 0;
+	        while (i < length) {
+	        	temp = (list.get(i) * (int)(Math.pow(10,length - i - 1)));
+	        	count += temp;
+	        	i++;
+	        }
+	        if (flag == 1)
+	            return -count;
+	        return count;
+	    }
+	
+		
+}

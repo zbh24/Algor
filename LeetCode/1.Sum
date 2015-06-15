@@ -1,0 +1,133 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int i,j;
+        vector<int> index;
+        sort(numbers.begin(),numbers.end());
+        j = 0;
+        
+        for (i = numbers.size() - 1; i >= 0; i--) {
+            if (target >= numbers[i]) {
+                i--;
+                continue;
+            }
+            while (j < i) {
+                if (numbers[i] + numbers[j] == target) {
+                    index.push_back(j + 1);
+                    index.push_back(i + 1);
+                    return index;
+                } else if (numbers[i] + numbers[j] > target){
+                    break;
+                }
+                j++;
+            }
+        }
+    }
+};
+
+
+----------------------------------------------------------------------------------------
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int i,j;
+        int k=0;
+        vector<int> index,copy;
+        for (i = 0; i < numbers.size() ;i++)
+            copy.push_back(numbers[i]);
+        sort(numbers.begin(),numbers.end());
+        j = 0;
+        
+        for (i = numbers.size() - 1; i >= 0; i--) {
+            if (target >= numbers[i]) {
+                i--;
+                continue;
+            }
+            while (j < i) {
+                if (numbers[i] + numbers[j] == target) {
+                   while (k < numbers.size()) {
+                       if (numbers[i] == copy[k] || numbers[j] == copy[k]){
+                           index.push_back(k + 1);
+                       }
+                       k++;
+                   }
+                   sort(index.begin(),index.end());
+                   return index;
+                } else if (numbers[i] + numbers[j] > target){
+                    break;
+                }
+                j++;
+            }
+        }
+    }
+};
+---------------------------------------------------------------------------------
+Accepted:
+C++
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int i,j;
+        int k=0;
+        vector<int> index,copy;
+        for (i = 0; i < numbers.size() ;i++)
+            copy.push_back(numbers[i]);
+        sort(numbers.begin(),numbers.end());
+        
+        for (i = numbers.size() - 1,j= 0; j < i;) {
+            if (numbers[i] + numbers[j] > target)
+                i--;
+            else if (numbers[i] + numbers[j] < target)
+                j++;
+            else  {
+                while (k < numbers.size()) {
+                       if (numbers[i] == copy[k] || numbers[j] == copy[k]){
+                           index.push_back(k + 1);
+                       }
+                       k++;
+                   }
+                   sort(index.begin(),index.end());
+                   return index;
+            }
+        }
+    }
+};
+
+---------------------------------------------------------------------
+Accepted:
+JAVA
+
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        int[] result = new int[2] ;
+        int i,j;
+        Map<Integer,Integer> map = new HashMap<Integer,Integer>();
+        
+        i = 0;
+        while (i < numbers.length) {
+            map.put(numbers[i],i);
+            i++;
+        }
+        i = 0;
+        while (i < numbers.length) {
+            if (map.containsKey(target - numbers[i])) {
+                if (map.get(target - numbers[i]) != i)
+                    break;
+            }
+            i++;
+        }
+        if (map.get(target -numbers[i]) < i) {
+            result[0] = map.get(target - numbers[i]) + 1;
+            result[1] = i + 1;
+            return result;
+        }
+        result[1] = map.get(target -numbers[i]) + 1;
+        result[0] = i + 1;
+        return result;
+    }
+}
+
+/*****
+*用hashMap时尽量把关键字放在key位置，不然性能会很差。虽然hashmap是这么声明的（key，value）
+*****/

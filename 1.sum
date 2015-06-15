@@ -1,0 +1,94 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int i,j;
+        vector<int> index;
+        sort(numbers.begin(),numbers.end());
+        j = 0;
+        
+        for (i = numbers.size() - 1; i >= 0; i--) {
+            if (target >= numbers[i]) {
+                i--;
+                continue;
+            }
+            while (j < i) {
+                if (numbers[i] + numbers[j] == target) {
+                    index.push_back(j + 1);
+                    index.push_back(i + 1);
+                    return index;
+                } else if (numbers[i] + numbers[j] > target){
+                    break;
+                }
+                j++;
+            }
+        }
+    }
+};
+
+
+----------------------------------------------------------------------------------------
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int i,j;
+        int k=0;
+        vector<int> index,copy;
+        for (i = 0; i < numbers.size() ;i++)
+            copy.push_back(numbers[i]);
+        sort(numbers.begin(),numbers.end());
+        j = 0;
+        
+        for (i = numbers.size() - 1; i >= 0; i--) {
+            if (target >= numbers[i]) {
+                i--;
+                continue;
+            }
+            while (j < i) {
+                if (numbers[i] + numbers[j] == target) {
+                   while (k < numbers.size()) {
+                       if (numbers[i] == copy[k] || numbers[j] == copy[k]){
+                           index.push_back(k + 1);
+                       }
+                       k++;
+                   }
+                   sort(index.begin(),index.end());
+                   return index;
+                } else if (numbers[i] + numbers[j] > target){
+                    break;
+                }
+                j++;
+            }
+        }
+    }
+};
+---------------------------------------------------------------------------------
+Accepted:
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        int i,j;
+        int k=0;
+        vector<int> index,copy;
+        for (i = 0; i < numbers.size() ;i++)
+            copy.push_back(numbers[i]);
+        sort(numbers.begin(),numbers.end());
+        
+        for (i = numbers.size() - 1,j= 0; j < i;) {
+            if (numbers[i] + numbers[j] > target)
+                i--;
+            else if (numbers[i] + numbers[j] < target)
+                j++;
+            else  {
+                while (k < numbers.size()) {
+                       if (numbers[i] == copy[k] || numbers[j] == copy[k]){
+                           index.push_back(k + 1);
+                       }
+                       k++;
+                   }
+                   sort(index.begin(),index.end());
+                   return index;
+            }
+        }
+    }
+};
